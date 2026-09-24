@@ -1,0 +1,8 @@
+﻿mem0ai
+qdrant-client
+openai
+python-dotenv
+rich
+pydantic
+prompt_toolkit
+tenacity

@@ -1,0 +1,26 @@
+# Secrets — never commit these
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Qdrant local storage (if accidentally created outside Docker)
+qdrant_storage/
+
+# Logs & session data
+*.jsonl
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
