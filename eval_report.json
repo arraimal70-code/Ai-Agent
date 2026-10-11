@@ -1,0 +1,131 @@
+{
+  "timestamp": "2026-10-11T08:17:32.663093",
+  "total_tests": 14,
+  "passed_tests": 14,
+  "overall_score": 100.0,
+  "threshold": 85.0,
+  "passed": true,
+  "metrics": {
+    "extraction_accuracy": 100.0,
+    "contradiction_resolution_rate": 100.0,
+    "noise_suppression_rate": 100.0,
+    "retrieval_recall_at_1": 100.0,
+    "retrieval_recall_at_3": 100.0,
+    "mean_reciprocal_rank": 1.0,
+    "avg_latency_ms": 0.04
+  },
+  "tests": [
+    {
+      "id": "EXT-01",
+      "category": "language",
+      "passed": true,
+      "latency_ms": 0.03,
+      "expected": "ADD with ['Go', 'Rust']",
+      "actual": "ADD (Fact: I primarily write backend mic...)"
+    },
+    {
+      "id": "EXT-02",
+      "category": "toolchain",
+      "passed": true,
+      "latency_ms": 0.02,
+      "expected": "ADD with ['Kubernetes', 'ArgoCD', 'Helm']",
+      "actual": "ADD (Fact: Our deployment pipeline runs ...)"
+    },
+    {
+      "id": "EXT-03",
+      "category": "workflow",
+      "passed": true,
+      "latency_ms": 0.01,
+      "expected": "ADD with ['TDD', 'Test-Driven Development']",
+      "actual": "ADD (Fact: Our engineering team strictly...)"
+    },
+    {
+      "id": "EXT-04",
+      "category": "constraint",
+      "passed": true,
+      "latency_ms": 0.01,
+      "expected": "ADD with ['latency', '50ms', 'Pydantic']",
+      "actual": "ADD (Fact: All API endpoints must have l...)"
+    },
+    {
+      "id": "NOISE-01",
+      "category": "small_talk",
+      "passed": true,
+      "latency_ms": 0.01,
+      "expected": "NONE (No durable state)",
+      "actual": "NONE"
+    },
+    {
+      "id": "NOISE-02",
+      "category": "generic_q",
+      "passed": true,
+      "latency_ms": 0.01,
+      "expected": "NONE (No durable state)",
+      "actual": "NONE"
+    },
+    {
+      "id": "NOISE-03",
+      "category": "pleasantry",
+      "passed": true,
+      "latency_ms": 0.01,
+      "expected": "NONE (No durable state)",
+      "actual": "NONE"
+    },
+    {
+      "id": "CONTRA-01",
+      "category": "toolchain",
+      "passed": true,
+      "latency_ms": 0.01,
+      "expected": "UPDATE (VS Code -> Neovim)",
+      "actual": "UPDATE ([toolchain] Uses Neovim with LSP as...)"
+    },
+    {
+      "id": "CONTRA-02",
+      "category": "framework",
+      "passed": true,
+      "latency_ms": 0.01,
+      "expected": "UPDATE (Django -> FastAPI)",
+      "actual": "UPDATE ([framework] Migrated to FastAPI for...)"
+    },
+    {
+      "id": "RET-01",
+      "category": "retrieval",
+      "passed": true,
+      "latency_ms": 0.07,
+      "expected": "Top-3 hit with ['Go', 'Rust']",
+      "actual": "Rank 1"
+    },
+    {
+      "id": "RET-02",
+      "category": "retrieval",
+      "passed": true,
+      "latency_ms": 0.06,
+      "expected": "Top-3 hit with ['Neovim']",
+      "actual": "Rank 1"
+    },
+    {
+      "id": "RET-03",
+      "category": "retrieval",
+      "passed": true,
+      "latency_ms": 0.06,
+      "expected": "Top-3 hit with ['Kubernetes', 'ArgoCD', 'Helm']",
+      "actual": "Rank 1"
+    },
+    {
+      "id": "RET-04",
+      "category": "retrieval",
+      "passed": true,
+      "latency_ms": 0.06,
+      "expected": "Top-3 hit with ['TDD', 'Test-Driven Development']",
+      "actual": "Rank 1"
+    },
+    {
+      "id": "RET-05",
+      "category": "retrieval",
+      "passed": true,
+      "latency_ms": 0.12,
+      "expected": "Top-3 hit with ['FastAPI']",
+      "actual": "Rank 1"
+    }
+  ]
+}

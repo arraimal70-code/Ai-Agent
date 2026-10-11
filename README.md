@@ -1,4 +1,4 @@
-﻿# ⚙ Self-Learning SWE Agent  —  v3 Production Memory Engine
+# ⚙ Self-Learning SWE Agent  —  v3 Production Memory Engine
 
 A production-grade, self-learning AI agent for **software engineering & workflow** with
 genuine long-term memory — built on **NVIDIA NIM + Mem0 + Qdrant (Docker)**.
@@ -119,7 +119,33 @@ python main.py --user arnav    # isolated memory namespace
 | `/stats` | Memory count by domain category |
 | `/history` | This session conversation so far |
 | `/clear` | Wipe ALL memories (confirmation required) |
+| `/eval` | Run automated benchmark suite & metric evaluation |
 | `/quit` | Exit (session log path shown) |
+
+---
+
+## Automated Ground-Truth Evaluation (`eval.py`)
+
+A production-grade evaluation harness measuring extraction precision, contradiction superseding, noise filtering, and semantic retrieval recall against a standardized ground-truth dataset:
+
+```powershell
+# Run evaluation suite:
+python eval.py
+
+# Run offline deterministic mock suite (suitable for CI/CD gating):
+python eval.py --mock
+
+# Enforce quality gate (fails build with exit code 1 if score < 85%):
+python eval.py --threshold 85
+```
+
+### Metrics Measured:
+- **Fact Extraction Accuracy:** Ground-truth classification of durable engineering state (`ADD`).
+- **Contradiction Resolution Rate:** Clean superseding of outdated preferences without duplication (`UPDATE`).
+- **Noise Suppression Rate:** Filtering out transient chatter and greetings (`NONE`).
+- **Retrieval Recall@1, Recall@3 & MRR:** Top-$k$ rank accuracy of memory context.
+- **Latency Profiling:** Turn latency in milliseconds.
+- **Automated Report:** Generates `eval_report.json` with timestamped telemetry.
 
 ---
 
@@ -141,7 +167,9 @@ self-learning-agent/
 ├── docker-compose.yml     Qdrant with persistent named volume
 ├── memory_manager.py      Mem0 wrapper — Pydantic models, typed interface
 ├── agent.py               Async engine — streaming, session history, retry
-├── main.py                CLI — streaming Live panel, 8 commands, JSONL log
+├── main.py                CLI — streaming Live panel, 9 commands, JSONL log
+├── eval.py                Evaluation harness — ground-truth benchmark suite
+├── eval_report.json       Detailed metric telemetry from last eval run
 ├── .env                   Your keys (pre-filled)
 ├── .env.example           Template
 ├── requirements.txt       8 packages

@@ -18,6 +18,7 @@ What is new in v3
     /stats              show memory stats per domain category
     /history            show this session conversation so far
     /clear              wipe ALL memories (with confirmation)
+    /eval               run automated evaluation & benchmark suite
     /quit               exit
 
 Run
@@ -365,6 +366,20 @@ def _cmd_clear(agent: SWEAgent) -> None:
         console.print("[dim]  Cancelled.[/dim]")
 
 
+def _cmd_eval(agent: SWEAgent, arg: str = "") -> None:
+    """Run the automated ground-truth evaluation and benchmark harness."""
+    try:
+        from eval import EvaluationHarness, render_report
+        use_mock = "--mock" in arg.lower()
+        test_user = f"eval_{agent.user_id}"
+        console.print(f"[dim]  Initializing evaluation suite for user namespace: {test_user}...[/dim]")
+        harness = EvaluationHarness(user_id=test_user, use_mock=use_mock)
+        summary = harness.run_suite()
+        render_report(summary, threshold=80.0)
+    except Exception as e:
+        console.print(f"[bold red]  Evaluation failed with error:[/bold red] {e}")
+
+
 def _handle_slash(cmd_str: str, agent: SWEAgent) -> bool:
     """Dispatch slash commands. Returns False to quit."""
     parts = cmd_str.strip().split(None, 1)
@@ -385,6 +400,8 @@ def _handle_slash(cmd_str: str, agent: SWEAgent) -> bool:
         _cmd_history(agent)
     elif cmd == "/clear":
         _cmd_clear(agent)
+    elif cmd == "/eval":
+        _cmd_eval(agent, arg)
     elif cmd in ("/quit", "/exit", "/q"):
         console.print(f"\n[bold cyan]  Session log → {_SESSION_LOG}[/bold cyan]")
         console.print("[bold cyan]  Goodbye — memories persist in Qdrant.[/bold cyan]\n")
@@ -392,7 +409,7 @@ def _handle_slash(cmd_str: str, agent: SWEAgent) -> bool:
     else:
         console.print(
             f"[yellow]  Unknown command:[/yellow] {cmd}   "
-            "[dim](try /memories /search /forget /export /stats /history /clear /quit)[/dim]"
+            "[dim](try /memories /search /forget /export /stats /history /clear /eval /quit)[/dim]"
         )
     return True
 
